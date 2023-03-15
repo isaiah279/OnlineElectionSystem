@@ -1,0 +1,135 @@
+Create a database to store all the necessary information related to the voting system such as voters, positions, candidates, and votes.
+
+Build the admin panel to manage the system by creating pages to add, list, and update voters, positions, and candidates.
+
+Develop the voter's login page where the user can log in using their voter ID.
+
+Create the voting page where voters can cast their vote by selecting their preferred candidate for each position.
+
+Implement the vote counting functionality to tally the votes for each candidate and display the total votes for each position.
+
+Secure the system by implementing authentication and authorization measures to prevent unauthorized access to the system and ensure that only registered voters can cast their vote.
+
+Test the system thoroughly to ensure that it is working as expected and fix any bugs or issues that you encounter.
+
+Overall, creating a simple voting
+
+
+
+
+
+
+///////////////////
+Create the basic HTML structure for your voting system. This should include the header, main content area, and footer.
+
+Design a layout for your voting system using CSS. You can use CSS frameworks like Bootstrap or Materialize to create a responsive layout that looks good on different screen sizes.
+
+Use HTML forms to create the login page where voters can enter their voter ID to log in to the system.
+
+Design the voting page using CSS to create an intuitive interface where voters can select their preferred candidates for each position.
+
+Use CSS to style the admin panel pages where the system administrator can manage voters, positions, and candidates.
+
+Ensure that your HTML and CSS code is clean and well-organized to make it easy to maintain and update in the future
+
+<?php
+    // retrieve the ID parameter
+    $id = $_GET['id'];
+
+    // retrieve the image data from the database using the ID
+    $qry = "SELECT photo FROM candidates WHERE firstname='$id' LIMIT 1";
+    $run = $conn->query($qry);
+
+    if ($run->num_rows > 0) {
+        $row = $run->fetch_assoc();
+        $image_data = $row['photo'];
+
+        // set the content type header
+        header("Content-type: image/jpeg");
+
+        // output the image data
+        echo $image_data;
+    } else {
+        // output a placeholder image if no image data is found
+        header("Content-type: image/png");
+        readfile("placeholder.png");
+    }
+?>
+
+
+
+
+Assuming that you have a database table named "submissions" that contains information about user submissions, you can use the following PHP code to count the number of submissions made by a particular user:
+
+php
+Copy code
+<?php
+
+// Assuming you have already established a connection to your database
+// and have stored the user's ID in a variable called $user_id
+
+// Construct SQL query to count the number of submissions made by the user
+$sql = "SELECT COUNT(*) as submission_count FROM submissions WHERE user_id = $user_id";
+
+// Execute the query and fetch the result
+$result = mysqli_query($connection, $sql);
+$row = mysqli_fetch_assoc($result);
+
+// Print the number of submissions made by the user
+echo "User $user_id has submitted " . $row['submission_count'] . " times.";
+
+?>
+
+
+https://codeshack.io/poll-voting-system-php-mysql/
+
+
+
+
+
+
+
+
+
+
+
+
+$i=1; 
+                      $qry = "SELECT photo, position, firstname, lastname FROM candidates";
+                      $run = $conn->query($qry);
+                      $i = 1;
+                      if ($run->num_rows > 0) {
+                          while ($row = $run->fetch_assoc()) {
+                              $id = $row['firstname'];
+                              $imageData = $row['photo'];
+                              $position = $row['position'];
+                              $firstname = $row['firstname'];
+                              $lastname = $row['lastname'];
+                              $image = (!empty($row['photo'])) ? 'image'.$row['photo'] : 'image';
+                  ?>
+                              <tr>
+                                  <td><?php echo $i++; ?></td>
+                                  <td><img width='50px' height='50px' src="image?id=<?php echo $id; ?>" alt="<?php echo $image;?>"></td>
+                                  <td><?php echo $position; ?></td>
+                                  <td><?php echo $firstname; ?></td>
+                                  <td><?php echo $lastname; ?></td>
+                                  <td><input name='check[]'type='checkbox'value=".$rows['candidate_id']." class='form-control'></td>
+                                  <td>
+                                      <div class="bookbtn">
+                                          <!-- add your action button code here -->
+                                      </div>
+                                  </td>
+                              </tr>
+                  <?php
+                          }
+                      } else {
+                          echo "No records found.";
+                      }
+                  ?>
+
+                  ////////////////////////////////////////
+
+
+
+
+                  
